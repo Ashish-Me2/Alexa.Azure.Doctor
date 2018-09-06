@@ -4,9 +4,9 @@
       "Symptoms": [ "headache" ],
       "MedicineComposition": [ "Paracetamol" ],
       "MedicineNames": [ "Crocin" ],
-      "DosageAdult": "1 tablet 8 hourly",
-      "DosageKid": "10 ml 8 hourly",
-      "AltMedicineNames": [ "Crocin DS" ]
+      "DosageAdult": "1 tablet",
+      "DosageKid": "10 ml once",
+      "AltMedicineNames": [ "P650 or Dolo650" ]
     },
     {
       "Symptoms": [ "fever" ],
@@ -14,16 +14,79 @@
       "MedicineNames": [ "Crocin" ],
       "DosageAdult": "1 tablet 8 hourly",
       "DosageKid": "10 ml 8 hourly",
-      "AltMedicineNames": [ "Crocin DS" ]
+      "AltMedicineNames": [ "Crocin D S for kids" ]
     },
     {
-      "Symptoms": [ "cold" ],
+      "Symptoms": [ "cold", "called" ],
+      "MedicineComposition": [ "Acetaminophen and chlorpheniramine" ],
+      "MedicineNames": [ "Sinarest" ],
+      "DosageAdult": "1 tablet 8 hourly",
+      "DosageKid": "10 ml 8 hourly",
+      "AltMedicineNames": [ "" ]
+    },
+    {
+      "Symptoms": [ "stomach ache","stomachache" ],
+      "MedicineComposition": [ "Cyclopam" ],
+      "MedicineNames": [ "Cyclopam" ],
+      "DosageAdult": "1 tablet",
+      "DosageKid": "7 ml",
+      "AltMedicineNames": [ "Himcospaz" ]
+    },
+    {
+      "Symptoms": [ "Diahorrea", "stomach infection" ],
+      "MedicineComposition": [ "Ofloxacin" ],
+      "MedicineNames": [ "OFM syrup or Ornof tablet or Norflox 400 tablet" ],
+      "DosageAdult": "ORNOF tablet twice daily for 3 days",
+      "DosageKid": "OFM syrup 10 ml twice daily for 3 days",
+      "AltMedicineNames": [ "Flagyl 400" ]
+    },
+    {
+      "Symptoms": [ "cold", "called" ],
       "MedicineComposition": [ "Paracetamol" ],
       "MedicineNames": [ "Sinarest" ],
       "DosageAdult": "1 tablet 8 hourly",
       "DosageKid": "10 ml 8 hourly",
-      "AltMedicineNames": [ "Crocin DS" ]
+      "AltMedicineNames": [ "Crocin D S" ]
+    },
+    {
+      "Symptoms": [ "cold", "called" ],
+      "MedicineComposition": [ "Paracetamol" ],
+      "MedicineNames": [ "Sinarest" ],
+      "DosageAdult": "1 tablet 8 hourly",
+      "DosageKid": "10 ml 8 hourly",
+      "AltMedicineNames": [ "Crocin D S" ]
+    },
+    {
+      "Symptoms": [ "Eye redness" ],
+      "MedicineComposition": [ "Ayurvedic Medicine" ],
+      "MedicineNames": [ "Eyetone" ],
+      "DosageAdult": "1 drop as needed",
+      "DosageKid": "1 drop as needed",
+      "AltMedicineNames": [ "Refresh Tears drops" ]
+    },
+    {
+      "Symptoms": [ "Eye Infection" ],
+      "MedicineComposition": [ "Ciprofloxacin drops" ],
+      "MedicineNames": [ "Ciplox Eye Drops" ],
+      "DosageAdult": "1 drop twice daily for 5 days",
+      "DosageKid": "1 drop twice daily for 5 days",
+      "AltMedicineNames": [ "" ]
+    },
+    {
+      "Symptoms": [ "skin allergy", "allergic skin rash", "allergic rashes", "allergy", "mosquito bite rash", "itching"],
+      "MedicineComposition": [ "Levocetrizine" ],
+      "MedicineNames": [ "Levocet or Cetrizine" ],
+      "DosageAdult": "1 tablet 10mg in 24 hours",
+      "DosageKid": "10 ml once in 24 hours",
+      "AltMedicineNames": [ "Cetrizine or Levocitrizine" ]
+    },
+    {
+      "Symptoms": [ "acidity" ],
+      "MedicineComposition": [ "Ranitidine" ],
+      "MedicineNames": [ "Rantac or Zinetac" ],
+      "DosageAdult": "1 tablet daily",
+      "DosageKid": "Domstal kid dispersible tablet",
+      "AltMedicineNames": [ "Lanzol junior tablet for kids" ]
     }
-
   ]
 }

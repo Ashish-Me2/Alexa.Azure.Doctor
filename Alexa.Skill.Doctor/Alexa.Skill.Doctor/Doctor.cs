@@ -25,9 +25,8 @@ namespace Alexa.Skill.Doctor
         {
             List<FactResource> resources = new List<FactResource>();
             FactResource enINResource = new FactResource("en-IN");
-            enINResource.SkillName = "Switchboard";
-            enINResource.GetFactMessage = "Here's the status of the room's devices";
-            enINResource.HelpMessage = "You can say ask Controller to turn on the bulb in the Living Room, or, you can say exit... What can I help you with?";
+            enINResource.SkillName = "Family Doctor";
+            enINResource.HelpMessage = "You can say, ask Family Doctor, suggest medicine for Headache for an adult, or suggest medicine for fever for a kid";
             enINResource.HelpReprompt = String.Empty;
             enINResource.StopMessage = String.Empty;
             enINResource.Facts.Add("Please speak your desired operation clearly...");
@@ -64,16 +63,20 @@ namespace Alexa.Skill.Doctor
 
             if (input.GetRequestType() == typeof(LaunchRequest))
             {
-                log.LogLine($"Default LaunchRequest made: 'Alexa, ask Doctor");
+                log.LogLine($"Default LaunchRequest made: 'Alexa, ask Family Doctor");
                 innerResponse = new PlainTextOutputSpeech();
-                (innerResponse as PlainTextOutputSpeech).Text = emitNewFact(resource, true);
+                (innerResponse as PlainTextOutputSpeech).Text = "You can say, ask Family Doctor, suggest medicine for Headache for an adult, or suggest medicine for fever for a kid";
 
             }
             else if (input.GetRequestType() == typeof(IntentRequest))
             {
                 var intentRequest = (IntentRequest)input.Request;
-                string SYMPTOM = intentRequest.Intent.Slots["SYMPTOM"].Value;
+                string SYMPTOM = null;
                 string AGE = intentRequest.Intent.Slots["AGE"].Value;
+                List<ResolutionAuthority> auths = intentRequest.Intent.Slots["SYMPTOM"].Resolution.Authorities.ToList();
+                auths.ForEach(a => {
+                    SYMPTOM = a.Values[0].Value.Name;
+                });
 
                 log.LogLine($"-------------------------------------------------------------");
                 log.LogLine($"INTENT RESOLVER received Intent - " + intentRequest.Intent.Name);
@@ -119,6 +122,7 @@ namespace Alexa.Skill.Doctor
                 }
                 catch (Exception exp)
                 {
+                    log.LogLine($"EXCEPTION: " + exp.Message + Environment.NewLine + exp.StackTrace);
                     innerResponse = new PlainTextOutputSpeech();
                     (innerResponse as PlainTextOutputSpeech).Text = "Sorry, I could not clearly understand the last request. Could you please repeat that...";
                     response.Response.ShouldEndSession = true;
@@ -137,7 +141,40 @@ namespace Alexa.Skill.Doctor
         {
             string retVal = String.Empty;
             Regimen r = SuggestMedicine(_Symptoms, Age);
-
+            if (r != null)
+            {
+                retVal += String.Format("Please use {0}. ", r.MedicineNames[0]);
+                if (String.IsNullOrEmpty(Age))
+                {
+                    retVal += String.Format("{0} for adult and {1} for a kid.", r.DosageAdult, r.DosageKid);
+                }
+                else
+                {
+                    switch (Age.ToUpper())
+                    {
+                        case "ADULT":
+                            retVal += String.Format("{0} for adults. ", r.DosageAdult);
+                            break;
+                        case "KID":
+                        case "CHILD":
+                            retVal += String.Format("{0} for kids. ", r.DosageKid);
+                            break;
+                        case "INFANT":
+                        case "BABY":
+                        case "TODDLER":
+                            retVal += " For infants please consult your doctor about safe dosage.";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                retVal += String.Format(" Alternate medicines are {0}.", r.AltMedicineNames[0]);
+                retVal += String.Format(" Generic composition is {0}", r.MedicineComposition[0]);
+            }
+            else
+            {
+                retVal = "Sorry, I could not find a suggested treatment for your symptoms. Please consult a doctor.";
+            }
             return retVal;
         }
 
@@ -146,7 +183,7 @@ namespace Alexa.Skill.Doctor
         {
             bool treatmentFound = false;
             Regimen retVal = null;
-            TreatmentRegimens model = JsonConvert.DeserializeObject<TreatmentRegimens>(File.ReadAllText(@"..\data.json").ToUpper());
+            TreatmentRegimens model = JsonConvert.DeserializeObject<TreatmentRegimens>(File.ReadAllText(@"./data.json").ToUpper());
             model.RegimenData.ForEach(r => {
                 if ((!treatmentFound) && (r.Symptoms.Contains(_Symptoms.ToUpper())))
                 {
