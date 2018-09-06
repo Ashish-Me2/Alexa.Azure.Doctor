@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa.Skill.Doctor", "Alexa.Skill.Doctor\Alexa.Skill.Doctor.csproj", "{D376C0BB-5E8B-47C0-A3E3-93A11CFE0FBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.Doctor.Test", "Alexa.Doctor.Test\Alexa.Doctor.Test.csproj", "{CCE656F2-728C-400A-BFCC-305AC54BB6E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D376C0BB-5E8B-47C0-A3E3-93A11CFE0FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D376C0BB-5E8B-47C0-A3E3-93A11CFE0FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D376C0BB-5E8B-47C0-A3E3-93A11CFE0FBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCE656F2-728C-400A-BFCC-305AC54BB6E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCE656F2-728C-400A-BFCC-305AC54BB6E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCE656F2-728C-400A-BFCC-305AC54BB6E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCE656F2-728C-400A-BFCC-305AC54BB6E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

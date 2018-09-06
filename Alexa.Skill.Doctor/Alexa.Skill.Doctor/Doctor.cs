@@ -10,6 +10,7 @@ using Alexa.NET.Request.Type;
 using Newtonsoft.Json;
 using System.Web;
 using System.Text.RegularExpressions;
+using System.IO;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
@@ -104,7 +105,7 @@ namespace Alexa.Skill.Doctor
                         case "SuggestMedicine":
                             log.LogLine($"SuggestMedicine sent: slot values:" + SYMPTOM + ", " + AGE);
                             innerResponse = new PlainTextOutputSpeech();
-                            responseText = SuggestMedicine(SYMPTOM, AGE).Result;
+                            responseText = GetAdvice(SYMPTOM, AGE);
                             (innerResponse as PlainTextOutputSpeech).Text = responseText;
                             response.Response.ShouldEndSession = true;
                             break;
@@ -131,11 +132,30 @@ namespace Alexa.Skill.Doctor
             return response;
         }
 
-        private async Task<string> SuggestMedicine(string Symptom, string Age)
+
+        private string GetAdvice(string _Symptoms, string Age)
         {
             string retVal = String.Empty;
+            Regimen r = SuggestMedicine(_Symptoms, Age);
 
-            return null;
+            return retVal;
+        }
+
+
+        private Regimen SuggestMedicine(string _Symptoms, string Age)
+        {
+            bool treatmentFound = false;
+            Regimen retVal = null;
+            TreatmentRegimens model = JsonConvert.DeserializeObject<TreatmentRegimens>(File.ReadAllText(@"..\data.json").ToUpper());
+            model.RegimenData.ForEach(r => {
+                if ((!treatmentFound) && (r.Symptoms.Contains(_Symptoms.ToUpper())))
+                {
+                    treatmentFound = true;
+                    retVal = r;
+                }
+            });
+
+            return retVal;
         }
     }
 }
